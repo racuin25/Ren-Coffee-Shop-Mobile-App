@@ -6,13 +6,10 @@ import CartScreen from "../screens/CartScreen";
 import FavoritesScreen from "../screens/FavoritesScreen";
 import OrderHistoryScreen from "../screens/OrderHistoryScreen";
 import { COLORS } from "../theme/theme";
-// import BlurView from "@react-native-community/blur/lib/typescript/components/BlurView.android";
-import { BlurView } from "@react-native-community/blur";
-import CustomIcon from "../components/CustomIcon";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { BlurView } from "expo-blur";
+import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
-// const AndroidBlurView = requireNativeComponent("AndroidBlurView");
 
 const TabNavigator = () => {
   return (
@@ -22,13 +19,9 @@ const TabNavigator = () => {
         tabBarHideOnKeyboard: true,
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBarStyle,
-        // tabBarBackground: () => (
-        //   <BlurView
-        //     overlayColor=""
-        //     blurAmount={15}
-        //     style={styles.blurViewStyles}
-        //   />
-        // ),
+        tabBarBackground: () => (
+          <BlurView intensity={15} style={styles.blurViewStyles} />
+        ),
       }}
     >
       <Tab.Screen
