@@ -1,6 +1,14 @@
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { COLORS } from "../theme/theme";
+import {
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import React, { useState } from "react";
+import { BORDERRADIUS, COLORS, FONTSIZE, SPACING } from "../theme/theme";
 import { useStore } from "../store/store";
 import ImageBackgroundInfo from "../components/ImageBackgroundInfo";
 
@@ -14,6 +22,9 @@ const DetailsScreen = ({ navigation, route }: any) => {
   const deleteFromFavoriteList = useStore(
     (state: any) => state.deleteFromFavoriteList
   );
+
+  const [fullDescription, setFullDescription] = useState(false);
+  const [price, setPrice] = useState(itemOfIndex.prices[0]);
 
   const ToggleFavorite = (favorite: boolean, type: string, id: string) => {
     favorite ? deleteFromFavoriteList(type, id) : addToFavoriteList(type, id);
@@ -45,6 +56,69 @@ const DetailsScreen = ({ navigation, route }: any) => {
           BackHandler={BackHandler}
           ToggleFavorite={ToggleFavorite}
         />
+
+        <View style={styles.footerInfoArea}>
+          <Text style={styles.infoTitle}>Description</Text>
+          {fullDescription ? (
+            <TouchableWithoutFeedback
+              onPress={() => {
+                setFullDescription((prev) => !prev);
+              }}
+            >
+              <Text style={styles.descriptionText}>
+                {itemOfIndex.description}
+              </Text>
+            </TouchableWithoutFeedback>
+          ) : (
+            <TouchableWithoutFeedback
+              onPress={() => {
+                setFullDescription((prev) => !prev);
+              }}
+            >
+              <Text style={styles.descriptionText} numberOfLines={3}>
+                {itemOfIndex.description}
+              </Text>
+            </TouchableWithoutFeedback>
+          )}
+          <Text style={styles.infoTitle}>Size</Text>
+          <View style={styles.sizeOuterContainer}>
+            {itemOfIndex.prices.map((data: any) => (
+              <TouchableOpacity
+                key={data.size}
+                onPress={() => {
+                  setPrice(data);
+                }}
+                style={[
+                  styles.sizeBox,
+                  {
+                    borderColor:
+                      data.size == price.size
+                        ? COLORS.primaryOrangeHex
+                        : COLORS.primaryDarkGreyHex,
+                  },
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.sizeText,
+                    {
+                      fontSize:
+                        itemOfIndex.type == "bean"
+                          ? FONTSIZE.size_14
+                          : FONTSIZE.size_16,
+                      color:
+                        data.size == price.size
+                          ? COLORS.primaryOrangeHex
+                          : COLORS.secondaryLightGreyHex,
+                    },
+                  ]}
+                >
+                  {data.size}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
       </ScrollView>
     </View>
   );
@@ -57,6 +131,36 @@ const styles = StyleSheet.create({
   },
   scrollViewFlex: {
     flexGrow: 1,
+  },
+  footerInfoArea: {
+    padding: SPACING.space_20,
+  },
+  infoTitle: {
+    fontSize: FONTSIZE.size_16,
+    color: COLORS.primaryWhiteHex,
+    marginBottom: SPACING.space_10,
+  },
+  descriptionText: {
+    fontSize: FONTSIZE.size_14,
+    color: COLORS.primaryWhiteHex,
+    marginBottom: SPACING.space_30,
+    letterSpacing: 0.5,
+  },
+  sizeOuterContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: SPACING.space_20,
+  },
+  sizeText: {},
+  sizeBox: {
+    flex: 1,
+    backgroundColor: COLORS.primaryDarkGreyHex,
+    alignItems: "center",
+    justifyContent: "center",
+    height: SPACING.space_24 * 2,
+    borderRadius: BORDERRADIUS.radius_10,
+    borderWidth: 2,
   },
 });
 
