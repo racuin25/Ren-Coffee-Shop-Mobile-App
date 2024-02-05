@@ -45,7 +45,7 @@ const getCoffeeList = (category: string, data: any) => {
 const HomeScreen = ({ navigation }: any) => {
   const coffeeList = useStore((state: any) => state.CoffeeList);
   const beanList = useStore((state: any) => state.BeanList);
-  console.log(beanList);
+  // console.log(beanList);
 
   const [categories, setCategories] = useState(
     getCategoriesFromData(coffeeList)
@@ -213,7 +213,11 @@ const HomeScreen = ({ navigation }: any) => {
             return (
               <TouchableOpacity
                 onPress={() => {
-                  navigation.push("Details");
+                  navigation.push("Details", {
+                    index: item.index,
+                    id: item.id,
+                    type: item.type,
+                  });
                 }}
               >
                 <CoffeeCard
@@ -246,7 +250,15 @@ const HomeScreen = ({ navigation }: any) => {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push("Details", {
+                    index: item.index,
+                    id: item.id,
+                    type: item.type,
+                  });
+                }}
+              >
                 <CoffeeCard
                   id={item.id}
                   index={item.index}
