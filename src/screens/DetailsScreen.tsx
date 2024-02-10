@@ -44,7 +44,7 @@ const DetailsScreen = ({ navigation, route }: any) => {
     name,
     roasted,
     imagelink_square,
-    spacial_ingredient,
+    special_ingredient,
     type,
     price,
   }: any) => {
@@ -54,7 +54,7 @@ const DetailsScreen = ({ navigation, route }: any) => {
       name,
       roasted,
       imagelink_square,
-      spacial_ingredient,
+      special_ingredient,
       type,
       prices: [{ ...price, quantity: 1 }],
     });
@@ -151,13 +151,13 @@ const DetailsScreen = ({ navigation, route }: any) => {
           price={price}
           buttonTitle="Add to Cart"
           buttonPressHandler={() => {
-            addToCart({
+            addToCartHandler({
               id: itemOfIndex.id,
               index: itemOfIndex.index,
               name: itemOfIndex.name,
               roasted: itemOfIndex.roasted,
-              imagelink_squareL: itemOfIndex.imagelink_square,
-              spacial_ingredient: itemOfIndex.special_ingredient,
+              imagelink_square: itemOfIndex.imagelink_square,
+              special_ingredient: itemOfIndex.special_ingredient,
               type: itemOfIndex.type,
               price: price,
             });
