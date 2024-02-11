@@ -166,14 +166,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingTop: "15%",
+    // paddingTop: "15%",
   },
   imageHeaderBarContainerWithoutBack: {
     padding: SPACING.space_30,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
-    paddingTop: "15%",
+    // paddingTop: "15%",
   },
   imageInfoOuterContainer: {
     paddingVertical: SPACING.space_24,

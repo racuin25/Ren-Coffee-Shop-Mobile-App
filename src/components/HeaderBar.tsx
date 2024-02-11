@@ -3,6 +3,7 @@ import React from "react";
 import { COLORS, FONTFAMILY, FONTSIZE, SPACING } from "../theme/theme";
 import ProfilePhoto from "./ProfilePhoto";
 import GradientBGIcon from "./GradientBGIcon";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface HeaderBarProps {
   title?: string;
@@ -10,7 +11,7 @@ interface HeaderBarProps {
 
 const HeaderBar: React.FC<HeaderBarProps> = ({ title }) => {
   return (
-    <View style={styles.headerContainer}>
+    <SafeAreaView style={styles.headerContainer}>
       <GradientBGIcon
         name="grid"
         color={COLORS.primaryLightGreyHex}
@@ -18,7 +19,7 @@ const HeaderBar: React.FC<HeaderBarProps> = ({ title }) => {
       />
       <Text style={styles.headerText}>{title}</Text>
       <ProfilePhoto />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingTop: "15%",
+    // paddingTop: "15%",
   },
   headerText: {
     fontSize: FONTSIZE.size_20,

@@ -12,6 +12,7 @@ import { BORDERRADIUS, COLORS, FONTSIZE, SPACING } from "../theme/theme";
 import { useStore } from "../store/store";
 import ImageBackgroundInfo from "../components/ImageBackgroundInfo";
 import PaymentFooter from "../components/PaymentFooter";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const DetailsScreen = ({ navigation, route }: any) => {
   console.log("route = ", route.params);
@@ -63,7 +64,7 @@ const DetailsScreen = ({ navigation, route }: any) => {
   };
 
   return (
-    <View style={styles.screenContainer}>
+    <SafeAreaView style={styles.screenContainer}>
       <StatusBar backgroundColor={COLORS.primaryBlackHex} />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -164,7 +165,7 @@ const DetailsScreen = ({ navigation, route }: any) => {
           }}
         />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
